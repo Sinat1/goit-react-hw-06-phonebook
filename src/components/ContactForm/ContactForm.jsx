@@ -2,7 +2,6 @@ import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
-import { nanoid } from 'nanoid';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -12,18 +11,15 @@ const ContactForm = () => {
     event.preventDefault();
 
     const form = event.target.elements;
-    const contact = {
-      id: nanoid(),
-      name: form.name.value,
-      number: form.number.value,
-    };
-    const name = selector.find(data => data.name === contact.name);
+    const name = form.name.value;
+    const number = form.number.value;
+    const NewName = selector.find(data => data.name === name.name);
     event.target.reset();
 
-    if (name) {
+    if (NewName) {
       return alert(`${name.name} is already in contacts`);
     } else {
-      return dispatch(addContact(contact));
+      return dispatch(addContact(name, number));
     }
   };
 
