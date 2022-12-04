@@ -13,11 +13,11 @@ const ContactForm = () => {
     const form = event.target.elements;
     const name = form.name.value;
     const number = form.number.value;
-    const NewName = selector.find(data => data.name === name.name);
+    const NewName = selector.find(data => data.name === name);
     event.target.reset();
 
     if (NewName) {
-      return alert(`${name.name} is already in contacts`);
+      return alert(`${NewName.name} is already in contacts`);
     } else {
       return dispatch(addContact(name, number));
     }
